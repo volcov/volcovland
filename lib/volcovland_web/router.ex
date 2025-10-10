@@ -18,6 +18,9 @@ defmodule VolcovlandWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    get "/blog", BlogController, :index
+    get "/blog/:id", BlogController, :show
   end
 
   # Other scopes may use custom stacks.

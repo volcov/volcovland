@@ -59,7 +59,9 @@ defmodule Volcovland.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:nimble_publisher, "~> 1.1"},
+      {:makeup_elixir, ">= 0.0.0"}
     ]
   end
 
