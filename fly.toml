@@ -3,9 +3,6 @@ primary_region = 'gru'
 
 [build]
 
-[deploy]
-  release_command = '/app/bin/migrate'
-
 [env]
   PHX_HOST = 'volcov.dev'
 
