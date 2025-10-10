@@ -1,6 +1,6 @@
 ARG ELIXIR_VERSION=1.18.4
-ARG OTP_VERSION=27.0
-ARG DEBIAN_VERSION=bookworm-20240812-slim
+ARG OTP_VERSION=27.0.1
+ARG DEBIAN_VERSION=bookworm-20240904-slim
 
 FROM hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION} as builder
 
@@ -72,10 +72,5 @@ ENV MIX_ENV="prod"
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/volcovland ./
 
 USER nobody
-
-# If using an environment that doesn't automatically reap zombie processes, it is
-# advised to add an init process such as tini via `apt-get install`
-# above and adding an entrypoint. See https://github.com/krallin/tini for details
-# ENTRYPOINT ["/tini", "--"]
 
 CMD ["/app/bin/server"]
