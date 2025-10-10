@@ -1,14 +1,14 @@
-<div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center px-4">
   <!-- Hero Section -->
-  <section class="max-w-4xl mx-auto px-4 py-20 text-center">
-    <h1 class="text-5xl md:text-6xl font-bold mb-6 flex items-center justify-center gap-3">
+  <section class="max-w-4xl mx-auto py-12 md:py-20 text-center">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
       <svg
-        class="h-12 md:h-16 w-12 md:w-16"
+        class="h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16 flex-shrink-0"
         viewBox="0 0 100 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <!-- bubble with more organic shape and inclined tip -->
+        <!-- head -->
         <path
           d="M55 8 C52 12, 45 22, 38 35 C32 45, 25 58, 23 70 C21 85, 28 98, 40 104 C48 108, 58 108, 66 104 C78 98, 85 85, 83 70 C81 58, 74 45, 68 35 C61 22, 58 12, 55 8 Z"
           fill="#7c3aed"
@@ -31,26 +31,28 @@
           stroke-linecap="round"
         />
       </svg>
-      Welcome to <span class="text-purple-600">Volcovland</span>
-      🎢
+
+      <span class="break-words">Welcome to <span class="text-purple-600">Volcovland</span></span>
+
+      <span class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">🎢</span>
     </h1>
 
-    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+    <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
       My little world on the internet where I share about programming,
       theme parks, and other interests.
     </p>
 
-    <div class="flex gap-4 justify-center">
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
       <button
         disabled
-        class="px-6 py-3 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed font-semibold"
+        class="w-full sm:w-auto px-6 py-3 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed font-semibold text-sm sm:text-base"
         title="Coming soon"
       >
         Blog (Coming Soon)
       </button>
       <.link
         navigate={~p"/about"}
-        class="px-6 py-3 border-2 border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition font-semibold"
+        class="w-full sm:w-auto px-6 py-3 border-2 border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition font-semibold text-sm sm:text-base"
       >
         About Me
       </.link>
