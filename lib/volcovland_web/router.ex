@@ -18,6 +18,7 @@ defmodule VolcovlandWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/about", AboutController, :index
 
     get "/blog", BlogController, :index
     get "/blog/:id", BlogController, :show
