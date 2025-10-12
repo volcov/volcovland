@@ -12,25 +12,44 @@
     </script>
     <script>
       (() => {
+        const getSystemTheme = () => {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+
+        const applyTheme = (actualTheme) => {
+          document.documentElement.setAttribute("data-theme", actualTheme);
+        };
+
         const setTheme = (theme) => {
           if (theme === "system") {
             localStorage.removeItem("phx:theme");
-            document.documentElement.removeAttribute("data-theme");
+            applyTheme(getSystemTheme());
           } else {
             localStorage.setItem("phx:theme", theme);
-            document.documentElement.setAttribute("data-theme", theme);
+            applyTheme(theme);
           }
         };
-        if (!document.documentElement.hasAttribute("data-theme")) {
-          setTheme(localStorage.getItem("phx:theme") || "system");
+
+        const savedTheme = localStorage.getItem("phx:theme");
+        if (savedTheme) {
+          setTheme(savedTheme);
+        } else {
+          setTheme("system");
         }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem("phx:theme")) {
+            applyTheme(e.matches ? 'dark' : 'light');
+          }
+        });
+
         window.addEventListener("storage", (e) => e.key === "phx:theme" && setTheme(e.newValue || "system"));
         
         window.addEventListener("phx:set-theme", (e) => setTheme(e.target.dataset.phxTheme));
       })();
     </script>
   </head>
-  <body>
+  <body class="bg-white dark:bg-gray-900">
     {@inner_content}
   </body>
 </html>

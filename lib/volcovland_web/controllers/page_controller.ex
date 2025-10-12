@@ -2,6 +2,6 @@ defmodule VolcovlandWeb.PageController do
   use VolcovlandWeb, :controller
 
   def home(conn, _params) do
-    render(conn, :home, layout: false)
+    render(conn, :home)
   end
 end
