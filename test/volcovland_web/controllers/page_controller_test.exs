@@ -7,14 +7,13 @@ defmodule VolcovlandWeb.PageControllerTest do
     assert html_response(conn, 200) =~ "volcovland"
   end
 
-  test "GET / shows an empty state when there are no posts", %{conn: conn} do
+  test "GET / features the latest post", %{conn: conn} do
+    post = hd(Volcovland.Blog.recent_posts(1))
+
     conn = get(conn, ~p"/")
     html = html_response(conn, 200)
 
-    if Volcovland.Blog.all_posts() == [] do
-      assert html =~ "Nothing published yet"
-    else
-      assert html =~ Volcovland.Blog.recent_posts(1) |> hd() |> Map.fetch!(:title)
-    end
+    assert html =~ post.title
+    assert html =~ ~p"/blog/#{post.id}"
   end
 end
