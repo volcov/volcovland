@@ -1,9 +1,9 @@
 <div class="min-h-screen flex flex-col gap-4 p-4 sm:p-6 lg:p-8 bg-zinc-100 dark:bg-gray-950">
   <Layouts.site_header />
 
-  <div class="flex-1 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3 lg:min-h-0">
+  <div class="flex-1 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-4 lg:min-h-0">
     <!-- Hero -->
-    <section class="sm:col-span-2 lg:col-start-1 lg:col-span-2 lg:row-start-1 lg:row-span-2 flex flex-col justify-center gap-5 rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-7 sm:p-9">
+    <section class="sm:col-span-2 lg:col-start-1 lg:col-span-2 lg:row-start-1 lg:row-span-4 flex flex-col justify-center gap-5 rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-7 sm:p-9">
       <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400 dark:text-gray-500">
         Welcome
       </span>
@@ -34,7 +34,7 @@
     </section>
     
 <!-- Who -->
-    <section class="lg:col-start-4 lg:row-start-1 flex flex-col items-center justify-center gap-3 text-center rounded-2xl border border-transparent bg-gradient-to-br from-purple-600 to-purple-900 p-6 text-white">
+    <section class="lg:col-start-4 lg:row-start-1 lg:row-span-2 flex flex-col items-center justify-center gap-3 text-center rounded-2xl border border-transparent bg-gradient-to-br from-purple-600 to-purple-900 p-6 text-white">
       <img
         src="https://github.com/volcov.png"
         alt="Bruno Volcov"
@@ -49,7 +49,7 @@
     </section>
     
 <!-- Coasters -->
-    <section class="lg:col-start-3 lg:row-start-1 lg:row-span-2 flex flex-col rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 overflow-hidden">
+    <section class="lg:col-start-3 lg:row-start-1 lg:row-span-4 flex flex-col rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 overflow-hidden">
       <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400 dark:text-gray-500">
         Rides
       </span>
@@ -100,45 +100,8 @@
       </div>
     </section>
     
-<!-- Latest post -->
-    <section class="sm:col-span-2 lg:col-start-1 lg:col-span-4 lg:row-start-3 rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
-      <%= if @latest_post do %>
-        <.link
-          navigate={~p"/blog/#{@latest_post.id}"}
-          class="group flex flex-col justify-between gap-4 h-full"
-        >
-          <div>
-            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400 dark:text-gray-500">
-              Latest post
-            </span>
-            <h2 class="mt-2.5 text-[17px] font-semibold tracking-tight leading-snug text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">
-              {@latest_post.title}
-            </h2>
-          </div>
-          <div class="text-xs text-gray-500 dark:text-gray-400">
-            {Calendar.strftime(@latest_post.date, "%B %Y")}
-            <%= if @latest_post.tags != [] do %>
-              · {Enum.join(@latest_post.tags, ", ")}
-            <% end %>
-          </div>
-        </.link>
-      <% else %>
-        <div class="flex flex-col justify-between gap-4 h-full">
-          <div>
-            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400 dark:text-gray-500">
-              Latest post
-            </span>
-            <h2 class="mt-2.5 text-[17px] font-semibold tracking-tight leading-snug text-gray-500 dark:text-gray-400">
-              Nothing published yet — the first post is on its way.
-            </h2>
-          </div>
-          <div class="text-xs text-gray-400 dark:text-gray-500">Coming soon</div>
-        </div>
-      <% end %>
-    </section>
-    
 <!-- Socials -->
-    <section class="lg:col-start-4 lg:row-start-2 flex flex-row items-center justify-center gap-3 rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
+    <section class="lg:col-start-4 lg:row-start-3 flex flex-row items-center justify-center gap-3 rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
       <a
         href="https://github.com/volcov"
         target="_blank"
@@ -173,6 +136,43 @@
         <span class="sr-only">Canary Data</span>
         <img src={~p"/images/canary-data.png"} alt="" class="w-[26px]" aria-hidden="true" />
       </a>
+    </section>
+    
+<!-- Latest post -->
+    <section class="lg:col-start-4 lg:row-start-4 rounded-2xl border border-zinc-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 overflow-hidden">
+      <%= if @latest_post do %>
+        <.link
+          navigate={~p"/blog/#{@latest_post.id}"}
+          class="group flex flex-col justify-between gap-3 h-full"
+        >
+          <div class="min-h-0">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400 dark:text-gray-500">
+              Latest post
+            </span>
+            <h2 class="mt-2 text-[15px] font-semibold tracking-tight leading-snug line-clamp-2 text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">
+              {@latest_post.title}
+            </h2>
+          </div>
+          <div class="text-xs truncate text-gray-500 dark:text-gray-400">
+            {Calendar.strftime(@latest_post.date, "%B %Y")}
+            <%= if @latest_post.tags != [] do %>
+              · {Enum.join(@latest_post.tags, ", ")}
+            <% end %>
+          </div>
+        </.link>
+      <% else %>
+        <div class="flex flex-col justify-between gap-3 h-full">
+          <div class="min-h-0">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400 dark:text-gray-500">
+              Latest post
+            </span>
+            <h2 class="mt-2 text-[15px] font-semibold tracking-tight leading-snug line-clamp-2 text-gray-500 dark:text-gray-400">
+              Nothing published yet.
+            </h2>
+          </div>
+          <div class="text-xs text-gray-400 dark:text-gray-500">Coming soon</div>
+        </div>
+      <% end %>
     </section>
   </div>
 </div>
