@@ -2,9 +2,14 @@
    https://tailwindcss.com/docs/configuration */
 
 @import "tailwindcss" source(none);
+@import "./makeup.css";
 @source "../css";
 @source "../js";
 @source "../../lib/volcovland_web";
+
+/* Typography plugin for post bodies (prose classes). The standalone Tailwind
+   CLI bundles this plugin, so no npm install is needed. */
+@plugin "@tailwindcss/typography";
 
 /* A Tailwind plugin that makes "hero-#{ICON}" classes available.
    The heroicons installation itself is managed by your mix.exs */

@@ -1,0 +1,2302 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Volcovland — modern directions</title>
+    <meta name="tidewave:canvas:version" content="1" />
+    <script src="https://tidewave.ai/tc/canvas.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ---------- shared inside cards ---------- */
+      design-card * {
+        box-sizing: border-box;
+      }
+      design-card .page {
+        width: 1080px;
+        height: 700px;
+        display: flex;
+        flex-direction: column;
+        font-family: "Inter", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow: hidden;
+      }
+      design-card p,
+      design-card h1,
+      design-card h2,
+      design-card h3,
+      design-card ul {
+        margin: 0;
+      }
+      design-card ul {
+        padding: 0;
+        list-style: none;
+      }
+      design-card a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .mascot {
+        display: block;
+      }
+
+      /* ============ mascot cards (round 2) ============ */
+      .mk {
+        width: 520px;
+        height: 356px;
+        background: #fbfbf9;
+        color: #17161a;
+        font-family: "Inter", system-ui, sans-serif;
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow: hidden;
+      }
+      .mk-sizes {
+        display: flex;
+        align-items: flex-end;
+        gap: 26px;
+        flex: 1;
+      }
+      .mk-slot {
+        text-align: center;
+      }
+      .mk-lab {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #a1a1aa;
+        margin-top: 8px;
+      }
+      .mk-ctx {
+        display: flex;
+        gap: 12px;
+      }
+      .mk-hdr {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: -0.01em;
+        padding: 11px 14px;
+        border: 1px solid #e4e4e7;
+        border-radius: 12px;
+        background: #fff;
+      }
+      .mk-hdr.dark {
+        background: #0b0b12;
+        border-color: #26262e;
+        color: #efeaff;
+      }
+
+      /* ============ 1a — Editorial ============ */
+      .ed {
+        background: #fbfbf9;
+        color: #17161a;
+        padding: 36px 64px 0;
+        --accent: #6d28d9;
+      }
+      .ed-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 28px;
+      }
+      .ed-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .ed-links {
+        display: flex;
+        gap: 28px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #6b6870;
+      }
+      .ed-links a.on {
+        color: #17161a;
+      }
+      .ed-eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 22px;
+      }
+      .ed-h1 {
+        font-size: 66px;
+        line-height: 1.02;
+        letter-spacing: -0.045em;
+        font-weight: 700;
+        max-width: 15ch;
+      }
+      .ed-h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .ed-sub {
+        margin-top: 22px;
+        font-size: 17px;
+        line-height: 1.6;
+        color: #56545c;
+        max-width: 46ch;
+      }
+      .ed-cta {
+        margin-top: 34px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .ed-btn {
+        font-size: 14px;
+        font-weight: 550;
+        padding: 11px 20px;
+        border-radius: 999px;
+        background: #17161a;
+        color: #fff;
+      }
+      .ed-btn.ghost {
+        background: transparent;
+        color: #17161a;
+        border: 1px solid #d7d5d0;
+      }
+      .ed-feed {
+        margin-top: auto;
+        border-top: 1px solid #e5e3de;
+      }
+      .ed-row {
+        display: grid;
+        grid-template-columns: 92px 1fr auto;
+        gap: 24px;
+        align-items: center;
+        padding: 18px 0;
+        border-bottom: 1px solid #e5e3de;
+        font-size: 15px;
+      }
+      .ed-row:last-child {
+        border-bottom: 0;
+      }
+      .ed-row .d {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11.5px;
+        color: #8b8890;
+        letter-spacing: 0.04em;
+      }
+      .ed-row .t {
+        font-weight: 550;
+        letter-spacing: -0.01em;
+      }
+      .ed-row .arr {
+        color: #b3b0b8;
+      }
+      .ed-row.hl .t {
+        color: var(--accent);
+      }
+      .ed-row.hl .arr {
+        color: var(--accent);
+      }
+
+      /* ============ 1b — Aurora glass ============ */
+      .au {
+        background: #08080e;
+        color: #efeaff;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+      }
+      .au-glow {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            48% 42% at 22% 12%,
+            rgba(124, 58, 237, 0.55) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            42% 40% at 82% 22%,
+            rgba(217, 70, 239, 0.4) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            60% 50% at 60% 108%,
+            rgba(56, 189, 248, 0.28) 0%,
+            transparent 70%
+          );
+        filter: blur(6px);
+      }
+      .au-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(70% 60% at 50% 45%, #000 20%, transparent 100%);
+      }
+      .au-inner {
+        position: relative;
+        text-align: center;
+        padding: 0 60px;
+      }
+      .au-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 12.5px;
+        padding: 7px 15px 7px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        color: #d9d2f5;
+        margin-bottom: 30px;
+      }
+      .au-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #4ade80;
+        box-shadow: 0 0 10px #4ade80;
+      }
+      .au-h1 {
+        font-size: 72px;
+        line-height: 1.03;
+        letter-spacing: -0.05em;
+        font-weight: 700;
+        background: linear-gradient(180deg, #ffffff 30%, #a99ce0 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .au-h1 .grad {
+        background: linear-gradient(92deg, #a78bfa, #e879f9 60%, #38bdf8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .au-sub {
+        margin: 22px auto 0;
+        max-width: 52ch;
+        font-size: 17px;
+        line-height: 1.65;
+        color: #a49dbb;
+      }
+      .au-cta {
+        margin-top: 36px;
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+      }
+      .au-btn {
+        font-size: 14.5px;
+        font-weight: 600;
+        padding: 13px 26px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #8b5cf6, #6d28d9);
+        color: #fff;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.14) inset,
+          0 12px 34px -8px rgba(139, 92, 246, 0.85);
+      }
+      .au-btn.ghost {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: none;
+        backdrop-filter: blur(12px);
+        color: #efeaff;
+      }
+      .au-chips {
+        margin-top: 54px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .au-chip {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #8d86a6;
+      }
+      .au-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 26px 40px;
+        font-size: 13.5px;
+        color: #b7b0d0;
+      }
+      .au-top .lk {
+        display: flex;
+        gap: 24px;
+      }
+
+      /* ============ 1c — Bento ============ */
+      .be {
+        background: #f4f4f5;
+        color: #18181b;
+        padding: 28px;
+        gap: 14px;
+      }
+      .be-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2px 6px 0;
+      }
+      .be-brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+      }
+      .be-nav {
+        display: flex;
+        gap: 8px;
+        font-size: 13px;
+        color: #52525b;
+      }
+      .be-nav span {
+        padding: 6px 13px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid #e4e4e7;
+      }
+      .be-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .tile {
+        background: #fff;
+        border: 1px solid #e4e4e7;
+        border-radius: 20px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+      .tile .lbl {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #a1a1aa;
+      }
+      .t-hero {
+        grid-column: span 3;
+        grid-row: span 2;
+        padding: 34px;
+        justify-content: center;
+        gap: 18px;
+      }
+      .t-hero h1 {
+        font-size: 50px;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+        max-width: 16ch;
+      }
+      .t-hero h1 span {
+        color: #7c3aed;
+      }
+      .t-hero p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #52525b;
+        max-width: 48ch;
+      }
+      .t-hero .row {
+        display: flex;
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .bt {
+        font-size: 13.5px;
+        font-weight: 550;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #18181b;
+        color: #fff;
+      }
+      .bt.ghost {
+        background: #f4f4f5;
+        color: #3f3f46;
+        border: 1px solid #e4e4e7;
+      }
+      .t-me {
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-align: center;
+        background: linear-gradient(160deg, #7c3aed, #4c1d95);
+        border-color: transparent;
+        color: #fff;
+      }
+      .t-me img {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.35);
+      }
+      .t-me .n {
+        font-weight: 650;
+        font-size: 15px;
+      }
+      .t-me .r {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.45;
+      }
+      .t-post .h {
+        font-size: 17px;
+        font-weight: 620;
+        line-height: 1.3;
+        letter-spacing: -0.015em;
+        margin-top: 10px;
+      }
+      .t-post .m {
+        font-size: 12px;
+        color: #71717a;
+        margin-top: 8px;
+      }
+      .t-stat .big {
+        font-size: 40px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      .t-stat .cap {
+        font-size: 12.5px;
+        color: #71717a;
+        margin-top: 6px;
+      }
+      .t-tags {
+        gap: 10px;
+      }
+      .t-tags .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 12px;
+      }
+      .t-tags .wrap span {
+        font-size: 12px;
+        padding: 5px 11px;
+        border-radius: 8px;
+        background: #f4f4f5;
+        color: #3f3f46;
+      }
+      .t-social {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+      .t-social .ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #18181b;
+        color: #fff;
+      }
+      .t-social .ic.li {
+        background: #0a66c2;
+      }
+
+      /* ============ 1d — Playful ============ */
+      .pl {
+        background: #fff8ec;
+        color: #12100e;
+        padding: 26px 46px;
+        --ink: #12100e;
+      }
+      .pl-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 2.5px solid var(--ink);
+        border-radius: 14px;
+        background: #fff;
+        padding: 10px 12px 10px 16px;
+        box-shadow: 4px 4px 0 var(--ink);
+      }
+      .pl-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        font-size: 17px;
+      }
+      .pl-nav .lk {
+        display: flex;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 550;
+      }
+      .pl-nav .lk a {
+        padding: 7px 14px;
+        border-radius: 9px;
+      }
+      .pl-nav .lk a.on {
+        background: #ffd84d;
+        border: 2px solid var(--ink);
+      }
+      .pl-hero {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        align-items: center;
+        gap: 40px;
+        padding: 12px 0;
+      }
+      .pl-h1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 68px;
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        font-weight: 700;
+      }
+      .pl-h1 .mark {
+        background: #ffd84d;
+        box-shadow: 0 0 0 6px #ffd84d;
+        border-radius: 2px;
+      }
+      .pl-h1 .out {
+        color: #7c3aed;
+      }
+      .pl-sub {
+        margin-top: 26px;
+        font-size: 17px;
+        line-height: 1.6;
+        color: #45403a;
+        max-width: 44ch;
+      }
+      .pl-cta {
+        margin-top: 32px;
+        display: flex;
+        gap: 14px;
+      }
+      .pl-btn {
+        font-weight: 650;
+        font-size: 15px;
+        padding: 13px 24px;
+        border-radius: 12px;
+        border: 2.5px solid var(--ink);
+        background: #7c3aed;
+        color: #fff;
+        box-shadow: 5px 5px 0 var(--ink);
+      }
+      .pl-btn.alt {
+        background: #fff;
+        color: var(--ink);
+      }
+      .pl-card {
+        border: 2.5px solid var(--ink);
+        border-radius: 22px;
+        background: #7c3aed;
+        box-shadow: 8px 8px 0 var(--ink);
+        padding: 26px 20px;
+        text-align: center;
+        color: #fff;
+        transform: rotate(3deg);
+      }
+      .pl-card .badge {
+        display: inline-block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: #ffd84d;
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        padding: 4px 11px;
+        margin-bottom: 14px;
+      }
+      .pl-card .nm {
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 12px;
+      }
+      .pl-card .rl {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 4px;
+        line-height: 1.5;
+      }
+      .pl-strip {
+        border: 2.5px solid var(--ink);
+        border-radius: 12px;
+        background: #12100e;
+        color: #fff8ec;
+        padding: 11px 0;
+        overflow: hidden;
+        margin-bottom: 4px;
+      }
+      .pl-strip .run {
+        display: flex;
+        gap: 34px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        padding-left: 20px;
+      }
+      .pl-strip .run i {
+        font-style: normal;
+        color: #ffd84d;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- round 5: three tones + wooden trestle.
+         --badge = deep field, --fg = drop, --inner = below-track region -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <path
+          id="dropPath5"
+          d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z"
+        />
+        <path
+          id="regionPath5"
+          d="M4 84 C18 84 20 48 40 48 C54 48 52 76 62 76 C70 76 70 62 80 62 L96 62 L96 104 L4 104 Z"
+        />
+        <clipPath id="clipDrop5"><use href="#dropPath5" /></clipPath>
+        <clipPath id="clipRegion5"><use href="#regionPath5" /></clipPath>
+
+        <g id="posts5">
+          <rect x="21.5" y="30" width="5" height="76" />
+          <rect x="31.5" y="30" width="5" height="76" />
+          <rect x="41.5" y="30" width="5" height="76" />
+          <rect x="51.5" y="30" width="5" height="76" />
+          <rect x="61.5" y="30" width="5" height="76" />
+          <rect x="71.5" y="30" width="5" height="76" />
+        </g>
+
+        <g id="lattice5" stroke-width="3.5" fill="none">
+          <path d="M-16 36 L52 104" />
+          <path d="M8 36 L76 104" />
+          <path d="M32 36 L100 104" />
+          <path d="M56 36 L124 104" />
+          <path d="M52 36 L-16 104" />
+          <path d="M76 36 L8 104" />
+          <path d="M100 36 L32 104" />
+          <path d="M124 36 L56 104" />
+        </g>
+      </defs>
+
+      <!-- simplified: no structure, for small sizes -->
+      <symbol id="m5s" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #3b0f75)" />
+        <use href="#dropPath5" fill="var(--fg, #fff)" />
+        <g clip-path="url(#clipDrop5)">
+          <use href="#regionPath5" fill="var(--inner, #7c3aed)" />
+        </g>
+      </symbol>
+
+      <!-- posts only -->
+      <symbol id="m5a" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #3b0f75)" />
+        <use href="#dropPath5" fill="var(--fg, #fff)" />
+        <g clip-path="url(#clipDrop5)">
+          <use href="#regionPath5" fill="var(--inner, #7c3aed)" />
+          <g clip-path="url(#clipRegion5)">
+            <use href="#posts5" fill="var(--fg, #fff)" opacity="0.92" />
+          </g>
+        </g>
+      </symbol>
+
+      <!-- full wooden trestle -->
+      <symbol id="m5b" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #3b0f75)" />
+        <use href="#dropPath5" fill="var(--fg, #fff)" />
+        <g clip-path="url(#clipDrop5)">
+          <use href="#regionPath5" fill="var(--inner, #7c3aed)" />
+          <g clip-path="url(#clipRegion5)">
+            <use href="#lattice5" stroke="var(--fg, #fff)" opacity="0.6" />
+            <use href="#posts5" fill="var(--fg, #fff)" opacity="0.92" />
+          </g>
+        </g>
+      </symbol>
+
+      <!-- trestle + car at the lift crest -->
+      <symbol id="m5c" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #3b0f75)" />
+        <use href="#dropPath5" fill="var(--fg, #fff)" />
+        <g clip-path="url(#clipDrop5)">
+          <use href="#regionPath5" fill="var(--inner, #7c3aed)" />
+          <g clip-path="url(#clipRegion5)">
+            <use href="#lattice5" stroke="var(--fg, #fff)" opacity="0.6" />
+            <use href="#posts5" fill="var(--fg, #fff)" opacity="0.92" />
+          </g>
+          <rect x="33" y="38" width="15" height="9.5" rx="2.5" fill="var(--inner, #7c3aed)" />
+        </g>
+      </symbol>
+    </svg>
+
+    <!-- round 4: elixir-style drop with the track inside, clipped to the drop -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <clipPath id="dropA">
+          <path d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z" />
+        </clipPath>
+        <clipPath id="dropB">
+          <path d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z" />
+        </clipPath>
+        <clipPath id="dropC">
+          <path d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z" />
+        </clipPath>
+        <clipPath id="dropD">
+          <path d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z" />
+        </clipPath>
+      </defs>
+
+      <symbol id="m4a" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <path
+          d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z"
+          fill="var(--fg, #fff)"
+        />
+        <g clip-path="url(#dropA)">
+          <path
+            d="M22 78 C32 78 34 58 47 58 C60 58 58 82 71 82 C78 82 81 76 84 71"
+            fill="none"
+            stroke="var(--badge, #7c3aed)"
+            stroke-width="8"
+            stroke-linecap="round"
+          />
+        </g>
+      </symbol>
+
+      <symbol id="m4b" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <path
+          d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z"
+          fill="var(--fg, #fff)"
+        />
+        <g clip-path="url(#dropB)">
+          <circle
+            cx="50"
+            cy="64"
+            r="11.5"
+            fill="none"
+            stroke="var(--badge, #7c3aed)"
+            stroke-width="7"
+          />
+          <path
+            d="M20 83 H80"
+            stroke="var(--badge, #7c3aed)"
+            stroke-width="7"
+            stroke-linecap="round"
+          />
+        </g>
+      </symbol>
+
+      <symbol id="m4c" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <path
+          d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z"
+          fill="var(--fg, #fff)"
+        />
+        <g clip-path="url(#dropC)">
+          <path
+            d="M33 58 C33 74 41 83 53 83 C65 83 72 77 78 69"
+            fill="none"
+            stroke="var(--badge, #7c3aed)"
+            stroke-width="8"
+            stroke-linecap="round"
+          />
+          <rect x="26" y="49" width="15" height="10" rx="3" fill="var(--badge, #7c3aed)" />
+        </g>
+      </symbol>
+
+      <symbol id="m4d" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <path
+          d="M50 9 C43 29 29 47 24 61 C19 77 30 92 50 92 C70 92 81 77 76 61 C71 47 57 29 50 9 Z"
+          fill="var(--fg, #fff)"
+        />
+        <g clip-path="url(#dropD)">
+          <path
+            d="M10 98 C22 98 24 60 40 60 C55 60 53 81 64 81 C75 81 76 70 90 70 L90 100 L10 100 Z"
+            fill="var(--badge, #7c3aed)"
+          />
+        </g>
+      </symbol>
+    </svg>
+
+    <!-- round 3 mascot symbols: --badge = tile, --fg = mark -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="m3a" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <circle
+          cx="50"
+          cy="46"
+          r="17"
+          fill="none"
+          stroke="var(--fg, #fff)"
+          stroke-width="9"
+        />
+        <path
+          d="M13 72 H87"
+          stroke="var(--fg, #fff)"
+          stroke-width="9"
+          stroke-linecap="round"
+        />
+      </symbol>
+
+      <symbol id="m3b" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <ellipse
+          cx="50"
+          cy="62"
+          rx="35"
+          ry="23"
+          fill="none"
+          stroke="var(--loop, #a78bfa)"
+          stroke-width="8"
+          transform="rotate(-18 50 62)"
+        />
+        <path
+          d="M50 18 C45 34 34 48 30 60 C26 73 33 86 50 86 C67 86 74 73 70 60 C66 48 55 34 50 18 Z"
+          fill="var(--fg, #fff)"
+        />
+      </symbol>
+
+      <symbol id="m3c" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <path
+          d="M20 24 C20 58 33 74 50 74 C67 74 80 58 80 24"
+          fill="none"
+          stroke="var(--fg, #fff)"
+          stroke-width="9"
+          stroke-linecap="round"
+        />
+        <rect x="11" y="13" width="18" height="13" rx="4" fill="var(--fg, #fff)" />
+      </symbol>
+
+      <symbol id="m3d" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="26" fill="var(--badge, #7c3aed)" />
+        <path
+          d="M27 25 L50 73 L73 25"
+          fill="none"
+          stroke="var(--fg, #fff)"
+          stroke-width="11"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
+    </svg>
+
+    <!-- mascot sprite -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="mascot" viewBox="0 0 100 120">
+        <path
+          d="M55 8 C52 12, 45 22, 38 35 C32 45, 25 58, 23 70 C21 85, 28 98, 40 104 C48 108, 58 108, 66 104 C78 98, 85 85, 83 70 C81 58, 74 45, 68 35 C61 22, 58 12, 55 8 Z"
+          fill="var(--mascot-fill, #7c3aed)"
+          stroke="var(--mascot-stroke, #6d28d9)"
+          stroke-width="2"
+        />
+        <circle cx="42" cy="60" r="4" fill="#1f2937" />
+        <circle cx="58" cy="60" r="4" fill="#1f2937" />
+        <circle cx="43" cy="59" r="1.5" fill="#fff" />
+        <circle cx="59" cy="59" r="1.5" fill="#fff" />
+        <path
+          d="M 40 70 Q 50 75, 60 70"
+          stroke="#1f2937"
+          stroke-width="2"
+          fill="none"
+          stroke-linecap="round"
+        />
+      </symbol>
+    </svg>
+
+    <design-document theme="auto">
+      <design-round marker="5">
+        <design-header>D, fixed: three tones + a wooden structure</design-header>
+        <design-note>
+          <p>
+            <strong>The contrast bug you spotted was real.</strong> In
+            <design-link marker="4d"></design-link> the squircle field and the knockout
+            were literally the same <code>--badge</code> value, so the bottom half of the
+            drop dissolved into the background and only the part above the track held the
+            silhouette. Fixed with a third tone: deep field
+            <code>#3b0f75</code>, white drop, and the below-track region in
+            <code>#7c3aed</code>. The drop now closes on all sides.
+          </p>
+          <p>
+            A side benefit: three self-contained tones mean the badge needs no light/dark
+            variants at all. The headers below prove it — same colours in both, unlike the
+            current mascot which hardcodes purple and has to be re-tinted.
+          </p>
+          <p>
+            <strong>On the wooden structure — the honest arithmetic.</strong> The trestle
+            lives in the purple band between the track and the bottom of the drop, which
+            is 17–42 units deep. At 28px that is <strong>4.8–11.8px</strong>. The posts
+            are 5 units (1.4px) and the lattice bracing 3.5 units (1px). So the structure
+            genuinely works at 56px and above, and genuinely does not at 28px — at header
+            size it turns into grey haze along the underside of the track.
+          </p>
+          <p>
+            That is not a reason to drop the idea; it's a reason to draw two. See
+            <design-link marker="5d"></design-link>.
+          </p>
+        </design-note>
+
+        <design-options>
+          <design-option marker="5a">
+            <design-header>A. Posts only</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m5a" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m5a" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5a" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5a" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5a" /></svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Six vertical support columns under the track, nothing else. Enough to say
+              "this hill is built, not natural" — which was the whole problem with
+              <design-link marker="4d"></design-link> — while keeping the count of
+              elements low. Survives furthest down the size range of the three structured
+              options.
+            </design-note>
+          </design-option>
+
+          <design-option marker="5b">
+            <design-header>B. Full trestle</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m5b" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m5b" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5b" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5b" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5b" /></svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Posts plus cross-bracing — the woven lattice that makes a wooden coaster
+              read as a wooden coaster and not a hill. Unambiguous at 128px and still
+              clear at 56px. At 28px the bracing is 1px and dissolves; what's left is
+              roughly <design-link marker="5a"></design-link> with a grey tint, which is
+              a graceful enough failure but not one to rely on.
+            </design-note>
+          </design-option>
+
+          <design-option marker="5c">
+            <design-header>C. Trestle + car at the crest</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m5c" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m5c" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5c" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5c" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5c" /></svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Adds a car cresting the lift hill, in the region purple so it reads against
+              the white. It's the element that removes any doubt — hills can be
+              landscape, a car on a trestle cannot. Best at 128px, and the first thing
+              to go below 56px.
+            </design-note>
+          </design-option>
+
+          <design-option marker="5d">
+            <design-header>D. Two drawings, one mark</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m5c" /></svg>
+                    <div class="mk-lab">128px — detailed</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m5b" /></svg>
+                    <div class="mk-lab">56px — trestle</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5s" /></svg>
+                    <div class="mk-lab">28px — simple</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5s" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m5s" /></svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Not a fourth design — the other three, used at the sizes where each one
+              actually works. The car-and-trestle version for the hero, About page and OG
+              image; the plain trestle in between; the structure dropped entirely for the
+              28px header and the 16px favicon, where the three-tone silhouette alone
+              still reads as a drop with a coaster profile through it.
+              <p>
+                This is what real marks do — it's why the Apple logo has a different
+                drawing at 16px than on a store wall. In Phoenix it's one attribute:
+                <code>&lt;Layouts.site_header variant="simple" /&gt;</code> against
+                <code>variant="full"</code>, both in the same component, so nothing gets
+                out of sync.
+              </p>
+            </design-note>
+          </design-option>
+        </design-options>
+      </design-round>
+
+      <design-round marker="4">
+        <design-header>Elixir drop, coaster track inside</design-header>
+        <design-note>
+          <p>
+            Your idea, four ways. All use
+            <design-link marker="2c"></design-link>'s squircle, a drop drawn at our own
+            proportions (an homage to the Elixir mark, not a trace of it), and the track
+            knocked out of the drop in the badge colour. Every interior shape is clipped
+            to the drop, so nothing bleeds past the silhouette.
+          </p>
+          <p>
+            <strong>The constraint to judge against.</strong> At the real 28px header
+            size the drop is about 17×23px, and its usable interior — inside the walls —
+            is roughly <strong>14×10px</strong>. An 8-unit stroke lands at 2.2px there.
+            So the interior affords two or three strokes, full stop. Anything more
+            detailed will silt up. That's why the four options below get progressively
+            simpler inside, and why
+            <design-link marker="4d"></design-link> uses a filled shape rather than a
+            line.
+          </p>
+          <p>
+            Same test columns as before: <strong>128px</strong>, <strong>56px</strong>,
+            the real <strong>28px</strong>, then light and dark headers.
+          </p>
+        </design-note>
+
+        <design-options>
+          <design-option marker="4a">
+            <design-header>A. Airtime hills</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m4a" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m4a" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4a" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4a" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m4a" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              A track crossing the whole drop, running off both edges — up a hill, down,
+              and away. Running it edge to edge rather than fitting it politely inside
+              buys the most track in the least space, and the clip does the rest. The
+              most literal reading of your idea.
+              <strong>Trade-off:</strong> two inflections is right at the ceiling for a
+              14px interior — at 16px favicon size the hills flatten into a bar.
+            </design-note>
+          </design-option>
+
+          <design-option marker="4b">
+            <design-header>B. Loop in the belly</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m4b" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m4b" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4b" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4b" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m4b" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              The loop sits where the drop is widest, with the rail beneath it running
+              out to both edges. The loop is the least ambiguous coaster shape there is,
+              so this is the option a stranger decodes fastest.
+              <strong>Trade-off:</strong> the loop's hole is about 4.8px across at 28px.
+              It survives, but it's the detail most at risk of filling in on a
+              low-DPI screen — and it's the busiest of the four.
+            </design-note>
+          </design-option>
+
+          <design-option marker="4c">
+            <design-header>C. Car at the lip</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m4c" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m4c" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4c" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4c" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m4c" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              The track curving down through the drop with a car poised at the top —
+              the moment before the plunge, tucked inside the Elixir silhouette.
+              The most charming at 128px by some distance.
+              <strong>Trade-off:</strong> the car is 15×10 units, about 4.2×2.8px at
+              28px. It reads as a dash rather than a vehicle, and the whole idea rests on
+              it. This is the option that most needs to be seen large.
+            </design-note>
+          </design-option>
+
+          <design-option marker="4d">
+            <design-header>D. Hills in negative space</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m4d" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m4d" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4d" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m4d" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m4d" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Instead of drawing a line inside the drop, this fills the bottom of it and
+              lets the <em>boundary</em> between the two be the track — a lift hill, a
+              drop, a smaller hill. The mark is then two solid shapes with one edge
+              between them, which is the construction that holds up best when small:
+              there is no stroke to thin out and no hole to fill in.
+              <strong>Trade-off:</strong> the least literal. Read cold it could be hills
+              or waves; it's the site around it that makes it a coaster.
+            </design-note>
+          </design-option>
+        </design-options>
+      </design-round>
+
+      <design-round marker="3">
+        <design-header>Squircle badge — with a coaster in it</design-header>
+        <design-note>
+          <p>
+            Taking <design-link marker="2c"></design-link>'s container — purple squircle,
+            one colour, no strokes under 8 units — and putting a theme-park idea inside
+            it instead of a generic flame. Same robustness, far more specific.
+          </p>
+          <p>
+            Same test as before: <strong>128px</strong>, <strong>56px</strong>, the real
+            <strong>28px</strong> header size, then a light and a dark header. The 28px
+            column is the one that decides it.
+          </p>
+        </design-note>
+
+        <design-options>
+          <design-option marker="3a">
+            <design-header>A. Loop on track</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m3a" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m3a" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3a" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3a" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m3a" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              A loop-the-loop sitting on its track — the single most recognisable coaster
+              shape there is, reduced to a circle and a line. Two primitives, a 9-unit
+              stroke (2.5px at 28px), nothing to lose when it shrinks. Reads as
+              "roller coaster" instantly and with no prior context.
+              <strong>Trade-off:</strong> nothing of the old mascot survives, and a
+              circle-on-a-line is a shape other people could land on too.
+            </design-note>
+          </design-option>
+
+          <design-option marker="3b">
+            <design-header>B. Flame through a loop</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m3b" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m3b" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3b" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3b" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030; --loop: #6d28d9"
+                    >
+                      <use href="#m3b" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Keeps the flame you already own and rings it with a tilted loop in a
+              lighter purple, so the two read as separate layers rather than merging.
+              The only option that carries both halves of the site — <em>volcov</em> and
+              the parks — in one mark, and the only one with continuity from the current
+              mascot.
+              <strong>Trade-off:</strong> three elements instead of two, and the loop is
+              the first thing to go soft at 16px favicon size.
+            </design-note>
+          </design-option>
+
+          <design-option marker="3c">
+            <design-header>C. The first drop</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m3c" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m3c" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3c" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3c" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m3c" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              The track valley with a car poised at the lip — the half-second before the
+              drop, which is the actual reason anyone queues. More narrative than
+              <design-link marker="3a"></design-link>: it depicts a moment rather than a
+              shape.
+              <strong>Trade-off:</strong> the car is a 18×13 unit block, about 5×3.6px at
+              28px. It holds there, but it's the first element that would disappear in a
+              16px favicon, and without it the U is ambiguous.
+            </design-note>
+          </design-option>
+
+          <design-option marker="3d">
+            <design-header>D. V as the drop</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100"><use href="#m3d" /></svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100"><use href="#m3d" /></svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3d" /></svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100"><use href="#m3d" /></svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 100 100"
+                      style="--badge: #a78bfa; --fg: #1a1030"
+                    >
+                      <use href="#m3d" />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              A single bold V that doubles as a coaster drop — V for Volcov, and the
+              steep-down-steep-up profile of a first drop. One path, 11-unit stroke
+              (3px at 28px), the most legible of the four and the only one that still
+              works stamped in one colour on a sticker.
+              <strong>Trade-off:</strong> the coaster reading is the weakest here — on
+              its own it's a letter, and only the site around it makes it a drop.
+            </design-note>
+          </design-option>
+        </design-options>
+      </design-round>
+
+      <design-round marker="2">
+        <design-header>Mascot — four ways forward</design-header>
+        <design-note>
+          <p>
+            <strong>What's actually wrong.</strong> The mark is drawn for one size and
+            used at another. Measured in the live header, where it renders at 28×28 from
+            a 100×120 viewBox (scale 0.233):
+          </p>
+          <ul>
+            <li><code>stroke-width="2"</code> smile and outline → <strong>0.47px</strong> — below one device pixel, so it renders as a grey smudge</li>
+            <li>eye highlights <code>r="1.5"</code> → <strong>0.70px</strong> — invisible</li>
+            <li>eyes <code>r="4"</code> → <strong>1.87px</strong> — two faint specks</li>
+          </ul>
+          <p>
+            It also has three different centres: the tip sits at x=55, the body's widest
+            span is centred on x=53, and the eyes are centred on x=50. That reads as
+            wobble at large sizes and as lopsidedness at small ones. Every option below
+            is symmetric about x=50, drops the sub-pixel highlights, and thickens what
+            remains so it survives 28px.
+          </p>
+          <p>
+            Each card shows the mark at <strong>128px</strong>, <strong>56px</strong> and
+            the real <strong>28px</strong> header size, then in a light and a dark header.
+            Judge them at 28px first — that's where it actually lives.
+          </p>
+        </design-note>
+
+        <design-options>
+          <!-- ---------------- 2a ---------------- -->
+          <design-option marker="2a">
+            <design-header>A. Same character, redrawn</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                      <circle cx="38" cy="70" r="6.5" fill="#1f2937" />
+                      <circle cx="62" cy="70" r="6.5" fill="#1f2937" />
+                      <path
+                        d="M39 88 Q50 96 61 88"
+                        stroke="#1f2937"
+                        stroke-width="5"
+                        fill="none"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                      <circle cx="38" cy="70" r="6.5" fill="#1f2937" />
+                      <circle cx="62" cy="70" r="6.5" fill="#1f2937" />
+                      <path
+                        d="M39 88 Q50 96 61 88"
+                        stroke="#1f2937"
+                        stroke-width="5"
+                        fill="none"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                      <circle cx="38" cy="70" r="6.5" fill="#1f2937" />
+                      <circle cx="62" cy="70" r="6.5" fill="#1f2937" />
+                      <path
+                        d="M39 88 Q50 96 61 88"
+                        stroke="#1f2937"
+                        stroke-width="5"
+                        fill="none"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                      <circle cx="38" cy="70" r="6.5" fill="#1f2937" />
+                      <circle cx="62" cy="70" r="6.5" fill="#1f2937" />
+                      <path
+                        d="M39 88 Q50 96 61 88"
+                        stroke="#1f2937"
+                        stroke-width="5"
+                        fill="none"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#a78bfa"
+                      />
+                      <circle cx="38" cy="70" r="6.5" fill="#1f2937" />
+                      <circle cx="62" cy="70" r="6.5" fill="#1f2937" />
+                      <path
+                        d="M39 88 Q50 96 61 88"
+                        stroke="#1f2937"
+                        stroke-width="5"
+                        fill="none"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              The conservative move: same purple flame, same face, but symmetric,
+              outline removed (it was doing nothing but muddying edges), eyes up from
+              r=4 to r=6.5 and the smile from 2 to 5. Still unmistakably your mascot —
+              it just stops falling apart in the header. Lowest risk, smallest gain.
+            </design-note>
+          </design-option>
+
+          <!-- ---------------- 2b ---------------- -->
+          <design-option marker="2b">
+            <design-header>B. Faceless mark, gradient</design-header>
+            <design-card>
+              <div class="mk">
+                <svg width="0" height="0" style="position: absolute">
+                  <defs>
+                    <linearGradient id="fl" x1="0" y1="0" x2="0.4" y2="1">
+                      <stop offset="0%" stop-color="#c084fc" />
+                      <stop offset="55%" stop-color="#7c3aed" />
+                      <stop offset="100%" stop-color="#4c1d95" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="url(#fl)"
+                      />
+                      <path
+                        d="M50 52 C46 64 40 72 38 80 C36 89 41 98 50 98 C59 98 64 89 62 80 C60 72 54 64 50 52 Z"
+                        fill="#fff"
+                        opacity="0.34"
+                      />
+                    </svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="url(#fl)"
+                      />
+                      <path
+                        d="M50 52 C46 64 40 72 38 80 C36 89 41 98 50 98 C59 98 64 89 62 80 C60 72 54 64 50 52 Z"
+                        fill="#fff"
+                        opacity="0.34"
+                      />
+                    </svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="url(#fl)"
+                      />
+                      <path
+                        d="M50 52 C46 64 40 72 38 80 C36 89 41 98 50 98 C59 98 64 89 62 80 C60 72 54 64 50 52 Z"
+                        fill="#fff"
+                        opacity="0.34"
+                      />
+                    </svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="url(#fl)"
+                      />
+                      <path
+                        d="M50 52 C46 64 40 72 38 80 C36 89 41 98 50 98 C59 98 64 89 62 80 C60 72 54 64 50 52 Z"
+                        fill="#fff"
+                        opacity="0.34"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="url(#fl)"
+                      />
+                      <path
+                        d="M50 52 C46 64 40 72 38 80 C36 89 41 98 50 98 C59 98 64 89 62 80 C60 72 54 64 50 52 Z"
+                        fill="#fff"
+                        opacity="0.34"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Drops the face entirely and reads as a flame — which fits
+              <em>volcov</em> far better than a smiling blob does. The inner highlight
+              gives it depth without any sub-pixel detail, so it's identical at 28px and
+              128px. Sharpest and most "modern" of the four.
+              <strong>Trade-off:</strong> you lose the cartoon warmth, and a gradient
+              mark is harder to reproduce in one colour (stickers, embroidery, a
+              favicon at 16px).
+            </design-note>
+          </design-option>
+
+          <!-- ---------------- 2c ---------------- -->
+          <design-option marker="2c">
+            <design-header>C. App icon — flame in a squircle</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 100">
+                      <rect width="100" height="100" rx="26" fill="#7c3aed" />
+                      <path
+                        d="M50 20 C45 36 34 50 30 62 C26 75 33 88 50 88 C67 88 74 75 70 62 C66 50 55 36 50 20 Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 100">
+                      <rect width="100" height="100" rx="26" fill="#7c3aed" />
+                      <path
+                        d="M50 20 C45 36 34 50 30 62 C26 75 33 88 50 88 C67 88 74 75 70 62 C66 50 55 36 50 20 Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 100">
+                      <rect width="100" height="100" rx="26" fill="#7c3aed" />
+                      <path
+                        d="M50 20 C45 36 34 50 30 62 C26 75 33 88 50 88 C67 88 74 75 70 62 C66 50 55 36 50 20 Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 100">
+                      <rect width="100" height="100" rx="26" fill="#7c3aed" />
+                      <path
+                        d="M50 20 C45 36 34 50 30 62 C26 75 33 88 50 88 C67 88 74 75 70 62 C66 50 55 36 50 20 Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 100">
+                      <rect width="100" height="100" rx="26" fill="#a78bfa" />
+                      <path
+                        d="M50 20 C45 36 34 50 30 62 C26 75 33 88 50 88 C67 88 74 75 70 62 C66 50 55 36 50 20 Z"
+                        fill="#1a1030"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              Two shapes, one colour, no strokes — the most robust option at any size,
+              and it drops straight into a favicon or an OG image. The solid tile also
+              gives the mark presence next to the wordmark that a thin silhouette can't.
+              Note this is exactly the pattern Canary Data's own logo uses, so the two
+              marks would sit together comfortably on the home page.
+              <strong>Trade-off:</strong> a squircle badge is the most generic of the
+              four — it says "app", not "Volcovland".
+            </design-note>
+          </design-option>
+
+          <!-- ---------------- 2d ---------------- -->
+          <design-option marker="2d">
+            <design-header>D. Flame through a loop</design-header>
+            <design-card>
+              <div class="mk">
+                <div class="mk-sizes">
+                  <div class="mk-slot">
+                    <svg width="128" height="128" viewBox="0 0 100 120">
+                      <circle
+                        cx="50"
+                        cy="74"
+                        r="33"
+                        fill="none"
+                        stroke="#7c3aed"
+                        stroke-width="7"
+                        opacity="0.3"
+                      />
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                    </svg>
+                    <div class="mk-lab">128px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="56" height="56" viewBox="0 0 100 120">
+                      <circle
+                        cx="50"
+                        cy="74"
+                        r="33"
+                        fill="none"
+                        stroke="#7c3aed"
+                        stroke-width="7"
+                        opacity="0.3"
+                      />
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                    </svg>
+                    <div class="mk-lab">56px</div>
+                  </div>
+                  <div class="mk-slot">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <circle
+                        cx="50"
+                        cy="74"
+                        r="33"
+                        fill="none"
+                        stroke="#7c3aed"
+                        stroke-width="7"
+                        opacity="0.3"
+                      />
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                    </svg>
+                    <div class="mk-lab">28px — real</div>
+                  </div>
+                </div>
+                <div class="mk-ctx">
+                  <div class="mk-hdr">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <circle
+                        cx="50"
+                        cy="74"
+                        r="33"
+                        fill="none"
+                        stroke="#7c3aed"
+                        stroke-width="7"
+                        opacity="0.3"
+                      />
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#7c3aed"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                  <div class="mk-hdr dark">
+                    <svg width="28" height="28" viewBox="0 0 100 120">
+                      <circle
+                        cx="50"
+                        cy="74"
+                        r="33"
+                        fill="none"
+                        stroke="#a78bfa"
+                        stroke-width="7"
+                        opacity="0.35"
+                      />
+                      <path
+                        d="M50 6 C43 28 28 48 22 66 C16 84 26 108 50 108 C74 108 84 84 78 66 C72 48 57 28 50 6 Z"
+                        fill="#a78bfa"
+                      />
+                    </svg>
+                    volcovland
+                  </div>
+                </div>
+              </div>
+            </design-card>
+            <design-note>
+              The flame with a coaster loop ringing it — the one option that carries both
+              halves of the site, Elixir and theme parks, in a single mark. The ring is a
+              7-unit stroke (1.6px at 28px), so unlike the old 2-unit smile it stays
+              visible.
+              <strong>Trade-off:</strong> it's still the busiest of the four at 28px, and
+              the ring reads as "loop" only if you already know the theme-park context —
+              otherwise it's just a circle.
+            </design-note>
+          </design-option>
+        </design-options>
+      </design-round>
+
+      <design-round marker="1">
+        <design-header>Volcovland — four “modern” directions</design-header>
+        <design-note>
+          <p>
+            All four keep the existing identity anchors — the purple mascot, the
+            <code>Volcovland</code> name, dark-mode support — but move away from the
+            current centered-hero-with-two-buttons layout, which currently leaves most
+            of the page empty and doesn't hint that a blog exists.
+          </p>
+          <p>
+            <strong>Shared upgrades across every option:</strong> a real display typeface
+            with tight negative tracking (the current default sans at
+            <code>font-bold</code> reads generic), a persistent top nav instead of a
+            lone floating theme toggle, and the landing page surfacing recent posts
+            rather than a disabled “Coming Soon” button.
+          </p>
+        </design-note>
+
+        <design-options>
+          <!-- ============================ 1a ============================ -->
+          <design-option marker="1a">
+            <design-header>A. Editorial — quiet, typography-first</design-header>
+            <design-card>
+              <main class="page ed">
+                <nav class="ed-nav">
+                  <div class="ed-brand">
+                    <svg class="mascot" width="26" height="31"><use href="#mascot" /></svg>
+                    volcovland
+                  </div>
+                  <div class="ed-links">
+                    <a class="on" href="#">Writing</a>
+                    <a href="#">About</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">Theme</a>
+                  </div>
+                </nav>
+
+                <div class="ed-eyebrow">Software Engineer &amp;&amp; Tech Lead — Canary Data</div>
+                <h1 class="ed-h1">
+                  Elixir, theme parks,<br />and everything <em>in between.</em>
+                </h1>
+                <p class="ed-sub">
+                  I'm Bruno — “volcov” around the Elixir community. This is my little
+                  world on the internet, where I write about the BEAM, roller coasters,
+                  coffee and chess.
+                </p>
+                <div class="ed-cta">
+                  <a class="ed-btn" href="#">Read the blog</a>
+                  <a class="ed-btn ghost" href="#">About me</a>
+                </div>
+
+                <div class="ed-feed">
+                  <div class="ed-row hl">
+                    <span class="d">2026 — 08</span>
+                    <span class="t">Elixir, who's that Pokémon?</span>
+                    <span class="arr">→</span>
+                  </div>
+                  <div class="ed-row">
+                    <span class="d">2026 — 06</span>
+                    <span class="t">Ranking every coaster I rode this year</span>
+                    <span class="arr">→</span>
+                  </div>
+                  <div class="ed-row">
+                    <span class="d">2026 — 04</span>
+                    <span class="t">Why I stopped reaching for GenServer</span>
+                    <span class="arr">→</span>
+                  </div>
+                </div>
+              </main>
+            </design-card>
+            <design-note>
+              Modern as <em>restraint</em>: one accent colour, mono microtype for dates
+              and labels, an asymmetric left-aligned headline, and the post list doubling
+              as the page's bottom edge. Cheapest to build — it's mostly type scale and
+              spacing changes on top of what you already have, and the mono/serif contrast
+              carries the personality instead of decoration. Ages best of the four.
+            </design-note>
+          </design-option>
+
+          <!-- ============================ 1b ============================ -->
+          <design-option marker="1b">
+            <design-header>B. Aurora — dark-first, glass &amp; glow</design-header>
+            <design-card>
+              <main class="page au">
+                <div class="au-glow"></div>
+                <div class="au-grid"></div>
+
+                <div class="au-top">
+                  <div
+                    class="ed-brand"
+                    style="color: #efeaff; --mascot-fill: #a78bfa; --mascot-stroke: #7c3aed"
+                  >
+                    <svg class="mascot" width="24" height="29"><use href="#mascot" /></svg>
+                    volcovland
+                  </div>
+                  <div class="lk">
+                    <a href="#">Blog</a><a href="#">About</a><a href="#">GitHub</a>
+                    <a href="#">☾</a>
+                  </div>
+                </div>
+
+                <div class="au-inner">
+                  <div class="au-pill">
+                    <span class="au-dot"></span> Now — writing about Elixir 1.20 &amp; OTP 28
+                  </div>
+                  <h1 class="au-h1">
+                    My little world<br />on the <span class="grad">internet</span>
+                  </h1>
+                  <p class="au-sub">
+                    Bruno “volcov” Volcov — Software Engineer &amp;&amp; Technical Lead at
+                    Canary Data. I write about the BEAM, theme parks, and the occasional
+                    chess opening I'll never actually learn.
+                  </p>
+                  <div class="au-cta">
+                    <a class="au-btn" href="#">Read the blog</a>
+                    <a class="au-btn ghost" href="#">About me →</a>
+                  </div>
+                  <div class="au-chips">
+                    <span class="au-chip">Elixir</span>
+                    <span class="au-chip">Theme parks</span>
+                    <span class="au-chip">Coffee</span>
+                    <span class="au-chip">Chess</span>
+                    <span class="au-chip">Nerd culture</span>
+                  </div>
+                </div>
+              </main>
+            </design-card>
+            <design-note>
+              The “2026 dev-site” look: mesh gradient, faint masked grid, frosted pills,
+              gradient headline, glowing primary button. Highest visual impact and it
+              makes your existing purple the whole brand.
+              <strong>Trade-off:</strong> it's a dark-first design, so the light theme needs
+              a genuinely different treatment rather than inverted tokens — and the style
+              is common enough right now that it will date faster than
+              <design-link marker="1a"></design-link>.
+            </design-note>
+          </design-option>
+
+          <!-- ============================ 1c ============================ -->
+          <design-option marker="1c">
+            <design-header>C. Bento — the homepage as a hub</design-header>
+            <design-card>
+              <main class="page be">
+                <div class="be-top">
+                  <div class="be-brand">
+                    <svg class="mascot" width="24" height="29"><use href="#mascot" /></svg>
+                    volcovland
+                  </div>
+                  <div class="be-nav">
+                    <span>Blog</span><span>About</span><span>☾</span>
+                  </div>
+                </div>
+
+                <div class="be-grid">
+                  <section class="tile t-hero">
+                    <div class="lbl">Welcome</div>
+                    <h1>Hey, I'm Bruno — <span>volcov</span> to the Elixir crowd.</h1>
+                    <p>
+                      My little world on the internet, where I share about programming,
+                      theme parks, and other interests.
+                    </p>
+                    <div class="row">
+                      <a class="bt" href="#">Read the blog</a>
+                      <a class="bt ghost" href="#">About me</a>
+                    </div>
+                  </section>
+
+                  <section class="tile t-me">
+                    <img src="https://github.com/volcov.png" alt="Bruno Volcov" />
+                    <div>
+                      <div class="n">Bruno Volcov</div>
+                      <div class="r">Software Engineer &amp;&amp; Technical Lead<br />Canary Data</div>
+                    </div>
+                  </section>
+
+                  <section class="tile t-stat">
+                    <div class="lbl">Coasters ridden</div>
+                    <div>
+                      <div class="big">147</div>
+                      <div class="cap">across 21 parks 🎢</div>
+                    </div>
+                  </section>
+
+                  <section class="tile t-post" style="grid-column: span 2">
+                    <div>
+                      <div class="lbl">Latest post</div>
+                      <div class="h">Elixir, who's that Pokémon? — ten years later</div>
+                    </div>
+                    <div class="m">August 2026 · 6 min read · elixir, talks</div>
+                  </section>
+
+                  <section class="tile t-tags">
+                    <div>
+                      <div class="lbl">Around here</div>
+                      <div class="wrap">
+                        <span>Elixir</span><span>Phoenix</span><span>Coffee</span>
+                        <span>Chess</span><span>Parks</span>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="tile t-social">
+                    <span class="ic">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                          d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                        />
+                      </svg>
+                    </span>
+                    <span class="ic li">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                        />
+                      </svg>
+                    </span>
+                  </section>
+                </div>
+              </main>
+            </design-card>
+            <design-note>
+              Turns the landing page into a personal dashboard: hero, avatar card, a
+              playful stat, the latest post, interests, socials. Modern in
+              <em>structure</em> rather than in effects, and it solves the real problem —
+              the current home page has nothing to look at.
+              <strong>Trade-off:</strong> tiles need real content to not feel like filler,
+              and the grid has to collapse to a single column on mobile.
+            </design-note>
+          </design-option>
+
+          <!-- ============================ 1d ============================ -->
+          <design-option marker="1d">
+            <design-header>D. Theme park — playful, high-contrast</design-header>
+            <design-card>
+              <main class="page pl">
+                <nav class="pl-nav">
+                  <div class="pl-brand">
+                    <svg class="mascot" width="24" height="29"><use href="#mascot" /></svg>
+                    VOLCOVLAND
+                  </div>
+                  <div class="lk">
+                    <a class="on" href="#">Blog</a><a href="#">About</a>
+                    <a href="#">GitHub</a><a href="#">☾</a>
+                  </div>
+                </nav>
+
+                <div class="pl-hero">
+                  <div>
+                    <h1 class="pl-h1">
+                      Welcome to<br /><span class="mark">Volcovland</span
+                      ><span class="out"> 🎢</span>
+                    </h1>
+                    <p class="pl-sub">
+                      Programming, theme parks and other obsessions. Elixir talks,
+                      coaster reviews, and far too much coffee — all in one place.
+                    </p>
+                    <div class="pl-cta">
+                      <a class="pl-btn" href="#">Read the blog</a>
+                      <a class="pl-btn alt" href="#">About me</a>
+                    </div>
+                  </div>
+
+                  <div class="pl-card">
+                    <span class="badge">Your host</span>
+                    <img
+                      src="https://github.com/volcov.png"
+                      alt="Bruno Volcov"
+                      style="
+                        width: 96px;
+                        height: 96px;
+                        border-radius: 50%;
+                        border: 3px solid #12100e;
+                        display: block;
+                        margin: 0 auto;
+                      "
+                    />
+                    <div class="nm">Bruno Volcov</div>
+                    <div class="rl">Software Engineer &amp;&amp; Tech Lead<br />Canary Data</div>
+                  </div>
+                </div>
+
+                <div class="pl-strip">
+                  <div class="run">
+                    <span>Elixir</span><i>✦</i><span>Theme parks</span><i>✦</i>
+                    <span>Coffee</span><i>✦</i><span>Chess</span><i>✦</i>
+                    <span>Nerd culture</span><i>✦</i><span>Elixir</span><i>✦</i>
+                    <span>Theme parks</span><i>✦</i><span>Coffee</span>
+                  </div>
+                </div>
+              </main>
+            </design-card>
+            <design-note>
+              Leans all the way into the name and the 🎢: chunky 2.5px ink borders, hard
+              offset shadows, a yellow highlighter mark, a tilted host card, and a
+              scrolling interests strip. Most memorable and the only one that actually
+              looks like “Volcovland” rather than a generic dev portfolio.
+              <strong>Trade-off:</strong> the loudest, and it needs a matching treatment
+              for the blog and post pages or the site will feel split in two — dark mode
+              also needs hand-tuning (ink borders go cream, background goes near-black).
+            </design-note>
+          </design-option>
+        </design-options>
+      </design-round>
+    </design-document>
+  </body>
+</html>

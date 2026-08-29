@@ -61,7 +61,9 @@ defmodule Volcovland.MixProject do
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
       {:nimble_publisher, "~> 1.1"},
-      {:makeup_elixir, ">= 0.0.0"}
+      {:makeup_elixir, ">= 0.0.0"},
+      {:makeup_erlang, ">= 0.0.0"},
+      {:tidewave, "~> 0.9.0", only: :dev}
     ]
   end
 
