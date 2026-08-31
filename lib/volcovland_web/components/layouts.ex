@@ -11,6 +11,60 @@ defmodule VolcovlandWeb.Layouts do
   # and other static content.
   embed_templates "layouts/*"
 
+  @site_name "Volcovland"
+  @site_description "My little world on the internet, where I share about Elixir, " <>
+                      "theme parks, and other interests."
+
+  @doc """
+  Composes the document title from the `:page_title` assign.
+
+  Pages without one get the bare site name, so the home page doesn't
+  read "Volcovland · Volcovland".
+  """
+  def page_title(nil), do: @site_name
+  def page_title(title), do: "#{title} · #{@site_name}"
+
+  @doc """
+  SEO and social meta tags for the `<head>`.
+
+  Per-page values come from controller render assigns (`:page_title`,
+  `:meta_description`, `:og_type`); anything unset falls back to the
+  site-wide defaults. Twitter reads the `og:` tags, so only the card
+  type needs spelling out.
+
+  ## Examples
+
+      <.meta_tags
+        conn={@conn}
+        page_title={assigns[:page_title]}
+        description={assigns[:meta_description]}
+        og_type={assigns[:og_type]}
+      />
+  """
+  attr :conn, Plug.Conn, required: true
+  attr :page_title, :string, default: nil
+  attr :description, :string, default: nil
+  attr :og_type, :string, default: nil
+
+  def meta_tags(assigns) do
+    assigns =
+      assigns
+      |> assign(:title, assigns.page_title || @site_name)
+      |> assign(:description, assigns.description || @site_description)
+      |> assign(:og_type, assigns.og_type || "website")
+
+    ~H"""
+    <meta name="description" content={@description} />
+    <meta property="og:site_name" content="Volcovland" />
+    <meta property="og:type" content={@og_type} />
+    <meta property="og:title" content={@title} />
+    <meta property="og:description" content={@description} />
+    <meta property="og:url" content={Phoenix.Controller.current_url(@conn)} />
+    <meta property="og:image" content={url(~p"/images/logo-mark-512.png")} />
+    <meta name="twitter:card" content="summary" />
+    """
+  end
+
   @doc """
   Renders your app layout.
 
