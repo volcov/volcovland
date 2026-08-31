@@ -4,9 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="Volcovland" suffix=" · Phoenix Framework">
-      {assigns[:page_title]}
+    <.live_title default="Volcovland">
+      {page_title(assigns[:page_title])}
     </.live_title>
+    <.meta_tags
+      conn={@conn}
+      page_title={assigns[:page_title]}
+      description={assigns[:meta_description]}
+      og_type={assigns[:og_type]}
+    />
     <link rel="icon" href={~p"/favicon.ico"} sizes="48x48" />
     <link rel="icon" href={~p"/images/favicon.svg"} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={~p"/images/apple-touch-icon.png"} />
